@@ -24,6 +24,10 @@ public class IntaveHook extends AbstractAnticheatHook<IntaveViolationEvent> impl
 
     @Override
     protected AnticheatFlag extractFlag(IntaveViolationEvent event) {
+        if (event.reaction() == IntaveViolationEvent.Reaction.INTERRUPT_AND_REPORT || event.reaction() == IntaveViolationEvent.Reaction.INTERRUPT) {
+            return null;
+        }
+
         return new AnticheatFlag(
                 event.player().getUniqueId(),
                 event.player().getName(),
